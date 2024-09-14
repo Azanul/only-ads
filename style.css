@@ -1,0 +1,27 @@
+header {
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    color: white;
+    text-align: center;
+    padding: 50px 0;
+    font-family: 'Arial', sans-serif;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+header:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+footer {
+    background: #333;
+    color: #f9f9f9;
+    text-align: center;
+    padding: 20px 0;
+    font-family: 'Arial', sans-serif;
+    transition: color 0.3s;
+}
+
+footer:hover {
+    color: #ff7e5f;
+}
