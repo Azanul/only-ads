@@ -106,11 +106,13 @@ async function loadAds(filteredAds = ads) {
 }
 
 function filterAds() {
+    const network = document.getElementById('network-filter').value;
+
     const minWidth = parseInt(document.getElementById('min-width-slider').value);
     const maxWidth = parseInt(document.getElementById('max-width-slider').value);
-    const filteredAds = ads.filter(ad => {
+    filteredAds = ads.filter(ad => {
         const adWidth = parseInt(ad.width);
-        return adWidth >= minWidth && adWidth <= maxWidth;
+        return adWidth >= minWidth && adWidth <= maxWidth && (network === 'all' || ad.network === network);
     });
     loadAds(filteredAds);
 }
