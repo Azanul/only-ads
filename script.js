@@ -1,7 +1,7 @@
 // Ad data
 const ads = [
     {
-        id: 1, category: 'technology', size: '468x60',
+        id: 1, network: 'adsterra', size: '468x60',
         type: 'script',
         script: `
         atOptions = {
@@ -15,7 +15,7 @@ const ads = [
         invokeScript: `//www.topcreativeformat.com/52b528f08afe5b89d519b9554c38ed16/invoke.js`
     },
     {
-        id: 2, category: 'fashion', size: '160x300',
+        id: 2, network: 'adsterra', size: '160x300',
         type: 'script',
         script: `
 	atOptions = {
@@ -29,7 +29,7 @@ const ads = [
         invokeScript: `https://www.topcreativeformat.com/42d5b2c6aded72e35032258326f0035f/invoke.js`
     },
     {
-        id: 3, category: 'fashion', size: '300x100',
+        id: 3, network: 'onclicka', size: '300x100',
         type: 'div',
         divAttributes: {
             'banner-id': '6031694',
@@ -40,7 +40,7 @@ const ads = [
         }
     },
     {
-        id: 4, category: 'food', size: '160x600',
+        id: 4, network: 'onclicka', size: '160x600',
         type: 'div',
         divAttributes: {
             'banner-id': '6031709',
@@ -55,7 +55,7 @@ const ads = [
 function loadAd(ad, container) {
     return new Promise((resolve) => {
         const adDiv = document.createElement('div');
-        adDiv.className = `ad ${ad.category} ${ad.size}`;
+        adDiv.className = `ad ${ad.network} ${ad.size}`;
         adDiv.innerHTML = `<h3>Ad ${ad.id}</h3>`;
 
         const adContentDiv = document.createElement('div');
@@ -106,16 +106,16 @@ async function loadAds(filteredAds = ads) {
 }
 
 function filterAds() {
-    const category = document.getElementById('category-filter').value;
+    const network = document.getElementById('network-filter').value;
     const size = document.getElementById('size-filter').value;
     const filteredAds = ads.filter(ad =>
-        (category === 'all' || ad.category === category) &&
+        (network === 'all' || ad.network === network) &&
         (size === 'all' || ad.size === size)
     );
     loadAds(filteredAds);
 }
 
-document.getElementById('category-filter').addEventListener('change', filterAds);
+document.getElementById('network-filter').addEventListener('change', filterAds);
 document.getElementById('size-filter').addEventListener('change', filterAds);
 
 // Initial load
