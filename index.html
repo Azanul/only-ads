@@ -18,12 +18,12 @@
                 <option value="adsterra">Adsterra</option>
                 <option value="onclika">OnClicka</option>
             </select>
-            <select id="size-filter">
-                <option value="all">All Sizes</option>
-                <option value="small">Small</option>
-                <option value="medium">Medium</option>
-                <option value="large">Large</option>
-            </select>
+            <label for="width-slider">Width Range:</label>
+            <div>
+                <input type="range" id="min-width-slider" min="100" max="800" value="0" step="10">
+                <input type="range" id="max-width-slider" min="100" max="800" value="800" step="10">
+            </div>
+            <span id="slider-range">0px - 800px</span>
         </aside>
         
         <section id="ad-container">

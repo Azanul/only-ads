@@ -1,7 +1,7 @@
 // Ad data
 const ads = [
     {
-        id: 1, network: 'adsterra', size: '468x60',
+        id: 1, network: 'adsterra', height: '60', width: '468',
         type: 'script',
         script: `
         atOptions = {
@@ -15,7 +15,7 @@ const ads = [
         invokeScript: `//www.topcreativeformat.com/52b528f08afe5b89d519b9554c38ed16/invoke.js`
     },
     {
-        id: 2, network: 'adsterra', size: '160x300',
+        id: 2, network: 'adsterra', height: '300', width: '160',
         type: 'script',
         script: `
 	atOptions = {
@@ -29,7 +29,7 @@ const ads = [
         invokeScript: `https://www.topcreativeformat.com/42d5b2c6aded72e35032258326f0035f/invoke.js`
     },
     {
-        id: 3, network: 'onclicka', size: '300x100',
+        id: 3, network: 'onclicka', height: '300', width: '100',
         type: 'div',
         divAttributes: {
             'banner-id': '6031694',
@@ -40,7 +40,7 @@ const ads = [
         }
     },
     {
-        id: 4, network: 'onclicka', size: '160x600',
+        id: 4, network: 'onclicka', height: '600', width: '160',
         type: 'div',
         divAttributes: {
             'banner-id': '6031709',
@@ -55,7 +55,7 @@ const ads = [
 function loadAd(ad, container) {
     return new Promise((resolve) => {
         const adDiv = document.createElement('div');
-        adDiv.className = `ad ${ad.network} ${ad.size}`;
+        adDiv.className = `ad ${ad.network} ${ad.width}`;
         adDiv.innerHTML = `<h3>Ad ${ad.id}</h3>`;
 
         const adContentDiv = document.createElement('div');
@@ -106,17 +106,32 @@ async function loadAds(filteredAds = ads) {
 }
 
 function filterAds() {
-    const network = document.getElementById('network-filter').value;
-    const size = document.getElementById('size-filter').value;
-    const filteredAds = ads.filter(ad =>
-        (network === 'all' || ad.network === network) &&
-        (size === 'all' || ad.size === size)
-    );
+    const minWidth = parseInt(document.getElementById('min-width-slider').value);
+    const maxWidth = parseInt(document.getElementById('max-width-slider').value);
+    const filteredAds = ads.filter(ad => {
+        const adWidth = parseInt(ad.width);
+        return adWidth >= minWidth && adWidth <= maxWidth;
+    });
     loadAds(filteredAds);
 }
 
+function updateSliderText() {
+    const minWidth = document.getElementById('min-width-slider').value;
+    const maxWidth = document.getElementById('max-width-slider').value;
+    document.getElementById('slider-range').innerText = `${minWidth}px - ${maxWidth}px`;
+}
+
+document.getElementById('min-width-slider').addEventListener('input', () => {
+    updateSliderText();
+    filterAds();
+});
+
+document.getElementById('max-width-slider').addEventListener('input', () => {
+    updateSliderText();
+    filterAds();
+});
+
 document.getElementById('network-filter').addEventListener('change', filterAds);
-document.getElementById('size-filter').addEventListener('change', filterAds);
 
 // Initial load
 document.addEventListener('DOMContentLoaded', () => {

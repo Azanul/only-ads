@@ -25,3 +25,53 @@ footer {
 footer:hover {
     color: #ff7e5f;
 }
+
+main {
+    display: flex;
+}
+
+#filters {
+    background-color: #f4f4f9;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#filters h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+#network-filter {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+#filters label {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    display: block;
+}
+
+#filters div {
+    margin-bottom: 20px;
+}
+
+#min-width-slider, #max-width-slider {
+    width: 48%;
+    margin-right: 2%;
+}
+
+#slider-range {
+    font-size: 0.9em;
+    color: #555;
+}
