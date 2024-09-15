@@ -1,7 +1,9 @@
 // Ad data
 const ads = [
     {
-        id: 1, category: 'technology', size: '468x60', script: `
+        id: 1, category: 'technology', size: '468x60',
+        type: 'script',
+        script: `
         atOptions = {
             'key' : '52b528f08afe5b89d519b9554c38ed16',
             'format' : 'iframe',
@@ -9,10 +11,13 @@ const ads = [
             'width' : 468,
             'params' : {}
         };
-    `, invokeScript: `//www.topcreativeformat.com/52b528f08afe5b89d519b9554c38ed16/invoke.js`
+    `,
+        invokeScript: `//www.topcreativeformat.com/52b528f08afe5b89d519b9554c38ed16/invoke.js`
     },
     {
-        id: 2, category: 'fashion', size: '160x300', script: `
+        id: 2, category: 'fashion', size: '160x300',
+        type: 'script',
+        script: `
 	atOptions = {
 		'key' : '42d5b2c6aded72e35032258326f0035f',
 		'format' : 'iframe',
@@ -20,7 +25,30 @@ const ads = [
 		'width' : 160,
 		'params' : {}
 	};
-    `, invokeScript: `//www.topcreativeformat.com/42d5b2c6aded72e35032258326f0035f/invoke.js`
+    `,
+        invokeScript: `https://www.topcreativeformat.com/42d5b2c6aded72e35032258326f0035f/invoke.js`
+    },
+    {
+        id: 3, category: 'fashion', size: '300x100',
+        type: 'div',
+        divAttributes: {
+            'banner-id': '6031694',
+        },
+        invokeScript: 'https://js.onclckmn.com/static/onclicka.js',
+        scriptAttributes: {
+            admpid: '230365',
+        }
+    },
+    {
+        id: 4, category: 'food', size: '160x600',
+        type: 'div',
+        divAttributes: {
+            'banner-id': '6031709',
+        },
+        invokeScript: 'https://js.onclckmn.com/static/onclicka.js',
+        scriptAttributes: {
+            admpid: '230365',
+        }
     },
 ];
 
@@ -36,12 +64,34 @@ function loadAd(ad, container) {
 
         container.appendChild(adDiv);
 
-        const script = document.createElement('script');
-        script.textContent = ad.script;
-        adContentDiv.appendChild(script);
+        if (ad.type === 'script') {
+            const script = document.createElement('script');
+            script.textContent = ad.script;
+            adContentDiv.appendChild(script);
+        } else if (ad.type === 'div') {
+            const bannerDiv = document.createElement('div');
+
+            // Add any custom data attributes to the banner div
+            if (ad.divAttributes) {
+                Object.entries(ad.divAttributes).forEach(([key, value]) => {
+                    bannerDiv.setAttribute(`data-${key}`, value);
+                });
+            }
+
+            adContentDiv.appendChild(bannerDiv);
+        }
 
         const invokeScript = document.createElement('script');
+        invokeScript.async = true;
         invokeScript.src = ad.invokeScript;
+
+        // Add any custom data attributes to the invoke script
+        if (ad.scriptAttributes) {
+            Object.entries(ad.scriptAttributes).forEach(([key, value]) => {
+                invokeScript.setAttribute(`data-${key}`, value);
+            });
+        }
+
         invokeScript.onload = () => resolve();
         adContentDiv.appendChild(invokeScript);
     });
