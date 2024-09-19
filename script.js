@@ -50,6 +50,13 @@ const ads = [
             admpid: '230365',
         }
     },
+    // Apply on clicking a test button
+    // {
+    //     id: 5, network: 'adsterra', height: '300', width: '160',
+    //     type: 'script',
+    //     script: ``,
+    //     invokeScript: `https://pl24382746.cpmrevenuegate.com/5e/79/2b/5e792bda8bfaf71280ee63c1d4710017.js`
+    // },
 ];
 
 function loadAd(ad, container) {
